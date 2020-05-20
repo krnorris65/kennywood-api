@@ -56,3 +56,44 @@ class ItinerarySerializer(serializers.HyperlinkedModelSerializer):
                 return Response(serializer.data)
             except Exception as ex:
                 return HttpResponseServerError(ex)
+        
+        def update(self, request, pk=None):
+            """Handle PUT requests for an itinerary
+
+            Return:
+                Response -- Empty body with 204 status code
+            """
+            attraction = Attraction.objects.get(pk=request.data["ride_id"])
+
+            itinerary = Itinerary.objects.get(pk=pk)
+            itinerary.attraction = attraction
+            itinerary.starttime = request.data["starttime"]
+            itinerary.save()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        
+        def destroy(self, request, pk=None):
+            """Handle DELETE requests for a single itinerary
+
+            Returns:
+                Response -- 200, 404, or 500 status code
+            """
+            try:
+                itinerary = Itinerary.objects.get(pk=pk)
+                itinerary.delete()
+            except Itinerary.DoesNotExist as ex:
+                return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+            except Exception as ex:
+                return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        def list(self, request):
+            """Handle GET requests to itinerary resource
+
+            Returns:
+                Response -- JSON serialized list of itinerary
+            """
+            areas = Itinerary.objects.all()
+            serializer = ItinerarySerializer(
+                areas, many=True, context={'request': request})
+            return Response(serializer.data)    
