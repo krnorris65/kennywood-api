@@ -91,6 +91,7 @@ class ParkAreas(ViewSet):
             Response -- JSON serialized list of park areas
         """
         areas = ParkArea.objects.all()
+
         serializer = ParkAreaSerializer(
             areas, many=True, context={'request': request})
         return Response(serializer.data)

@@ -94,9 +94,10 @@ class Itineraries(ViewSet):
         Returns:
             Response -- JSON serialized list of itinerary
         """
-        customer = Customer.objects.get(user=request.auth.user)
+        # customer = Customer.objects.get(user=request.auth.user)
 
-        itineraries = Itinerary.objects.filter(customer=customer)
+        # itineraries = Itinerary.objects.filter(customer=customer)
+        itineraries = Itinerary.objects.all()
         serializer = ItinerarySerializer(
             itineraries, many=True, context={'request': request})
         return Response(serializer.data)
