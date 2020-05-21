@@ -1,0 +1,58 @@
+[
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 1,
+      "fields": {
+        "name": "Comet Diver",
+        "area_id": 1
+      }
+    },
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 2,
+      "fields": {
+        "name": "The Defiant Boat",
+        "area_id": 1
+      }
+    },
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 3,
+      "fields": {
+        "name": "Tower of Adventure",
+        "area_id": 2
+      }
+    },
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 4,
+      "fields": {
+        "name": "The Daffy House",
+        "area_id": 2
+      }
+    },
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 5,
+      "fields": {
+        "name": "Dream Fun Park",
+        "area_id": 2
+      }
+    },
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 6,
+      "fields": {
+        "name": "Division Wheel",
+        "area_id": 3
+      }
+    },
+    {
+      "model": "kennywoodapi.Attraction",
+      "pk": 7,
+      "fields": {
+        "name": "Rider of Stars",
+        "area_id": 3
+      }
+    }
+  ]
