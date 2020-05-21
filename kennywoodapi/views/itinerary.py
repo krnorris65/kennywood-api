@@ -52,10 +52,14 @@ class Itineraries(ViewSet):
             Response -- JSON serialized itinerary instance
         """
         try:
+            requesting_user = Customer.objects.get(user=request.auth.user)
             itinerary = Itinerary.objects.get(pk=pk)
-            serializer = ItinerarySerializer(itinerary, context={'request': request})
-
-            return Response(serializer.data)
+            # only return the itinerary if the user requesting is the user that is associated with that itinerary
+            if itinerary.customer == requesting_user:
+                serializer = ItinerarySerializer(itinerary, context={'request': request})
+                return Response(serializer.data)
+            else: 
+                return Response({}, status=status.HTTP_403_FORBIDDEN)
         except Exception as ex:
             return HttpResponseServerError(ex)
     
@@ -65,14 +69,19 @@ class Itineraries(ViewSet):
         Return:
             Response -- Empty body with 204 status code
         """
-        attraction = Attraction.objects.get(pk=request.data["ride_id"])
-
+        requesting_user = Customer.objects.get(user=request.auth.user)
+        # only update the itinerary if the user requesting is the user that is associated with that itinerary
         itinerary = Itinerary.objects.get(pk=pk)
-        itinerary.attraction = attraction
-        itinerary.starttime = request.data["starttime"]
-        itinerary.save()
+        if itinerary.customer == requesting_user:
+            attraction = Attraction.objects.get(pk=request.data["ride_id"])
 
-        return Response({}, status=status.HTTP_204_NO_CONTENT)
+            itinerary.attraction = attraction
+            itinerary.starttime = request.data["starttime"]
+            itinerary.save()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        else: 
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
     
     def destroy(self, request, pk=None):
         """Handle DELETE requests for a single itinerary
@@ -81,8 +90,13 @@ class Itineraries(ViewSet):
             Response -- 200, 404, or 500 status code
         """
         try:
+            requesting_user = Customer.objects.get(user=request.auth.user)
             itinerary = Itinerary.objects.get(pk=pk)
-            itinerary.delete()
+            # only delete the itinerary if the user requesting is the user that is associated with that itinerary
+            if itinerary.customer == requesting_user:
+                itinerary.delete()
+            else: 
+                return Response({}, status=status.HTTP_403_FORBIDDEN)
         except Itinerary.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
