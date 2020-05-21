@@ -13,12 +13,13 @@ class ItinerarySerializer(serializers.HyperlinkedModelSerializer):
         serializers
     """
     class Meta:
-        model: Itinerary
-        url: serializers.HyperlinkedIdentityField(
+        model = Itinerary
+        url = serializers.HyperlinkedIdentityField(
             view_name="itinerary",
             lookup_field='id'
         )
-        fields = ('id', 'url', 'attraction', 'starttime')
+        fields = ('id', 'url', 'attraction', 'starttime',)
+        depth = 2      
 
 
 class Itineraries(ViewSet):
@@ -30,7 +31,7 @@ class Itineraries(ViewSet):
         Returns:
             Response -- JSON serialized Itinerary instance
         """
-        customer = Customer.objects.get(pk=request.auth.user)
+        customer = Customer.objects.get(user=request.auth.user)
         attraction = Attraction.objects.get(pk=request.data["ride_id"])
 
         new_itinerary = Itinerary()
@@ -94,10 +95,9 @@ class Itineraries(ViewSet):
         Returns:
             Response -- JSON serialized list of itinerary
         """
-        # customer = Customer.objects.get(user=request.auth.user)
+        customer = Customer.objects.get(user=request.auth.user)
 
-        # itineraries = Itinerary.objects.filter(customer=customer)
-        itineraries = Itinerary.objects.all()
+        itineraries = Itinerary.objects.filter(customer=customer)
         serializer = ItinerarySerializer(
             itineraries, many=True, context={'request': request})
         return Response(serializer.data)

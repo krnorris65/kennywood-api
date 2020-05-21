@@ -1,0 +1,47 @@
+[
+    {
+      "model": "kennywoodapi.Itinerary",
+      "pk": 1,
+      "fields": {
+        "starttime": 12,
+        "attraction_id": 3,
+        "customer_id": 1
+      }
+    },
+    {
+      "model": "kennywoodapi.Itinerary",
+      "pk": 2,
+      "fields": {
+        "starttime": 13,
+        "attraction_id": 4,
+        "customer_id": 1
+      }
+    },
+    {
+      "model": "kennywoodapi.Itinerary",
+      "pk": 3,
+      "fields": {
+        "starttime": 8,
+        "attraction_id": 7,
+        "customer_id": 1
+      }
+    },
+    {
+      "model": "kennywoodapi.Itinerary",
+      "pk": 4,
+      "fields": {
+        "starttime": 10,
+        "attraction_id": 1,
+        "customer_id": 2
+      }
+    },
+    {
+      "model": "kennywoodapi.Itinerary",
+      "pk": 5,
+      "fields": {
+        "starttime": 9,
+        "attraction_id": 6,
+        "customer_id": 2
+      }
+    }
+  ]

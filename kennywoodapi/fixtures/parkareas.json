@@ -1,0 +1,26 @@
+[
+    {
+      "model": "kennywoodapi.ParkArea",
+      "pk": 1,
+      "fields": {
+        "name": "Splashin Safari",
+        "theme": "Water Rides"
+      }
+    },
+    {
+      "model": "kennywoodapi.ParkArea",
+      "pk": 2,
+      "fields": {
+        "name": "Kiddie Kingdom",
+        "theme": "Wee Ones Wander Free"
+      }
+    },
+    {
+      "model": "kennywoodapi.ParkArea",
+      "pk": 3,
+      "fields": {
+        "name": "Kennywood Speedway",
+        "theme": "Planes, Trains, and Automobiles"
+      }
+    }
+  ]
