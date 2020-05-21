@@ -19,6 +19,7 @@ class AttractionSerializer(serializers.HyperlinkedModelSerializer):
             lookup_field='id'
         )
         fields = ('id', 'url', 'name', 'area')
+        depth = 2
 
 class Attractions(ViewSet):
     """Attractions for Kennywood Amusement Park"""

@@ -19,7 +19,8 @@ class ParkAreaSerializer(serializers.HyperlinkedModelSerializer):
             view_name='parkarea',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'name', 'theme')
+        fields = ('id', 'url', 'name', 'theme', 'attractions')
+        depth = 2
 
 
 class ParkAreas(ViewSet):
