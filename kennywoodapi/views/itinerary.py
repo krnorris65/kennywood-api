@@ -18,7 +18,7 @@ class ItinerarySerializer(serializers.HyperlinkedModelSerializer):
             view_name="itinerary",
             lookup_field='id'
         )
-        fields = ('id', 'url', 'attraction', 'starttime',)
+        fields = ('id', 'url', 'attraction', 'starttime', 'attraction_id',)
         depth = 2      
 
 
