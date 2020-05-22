@@ -32,7 +32,7 @@ class Itineraries(ViewSet):
             Response -- JSON serialized Itinerary instance
         """
         customer = Customer.objects.get(user=request.auth.user)
-        attraction = Attraction.objects.get(pk=request.data["ride_id"])
+        attraction = Attraction.objects.get(pk=request.data["attraction_id"])
 
         new_itinerary = Itinerary()
         new_itinerary.customer = customer
@@ -73,7 +73,7 @@ class Itineraries(ViewSet):
         # only update the itinerary if the user requesting is the user that is associated with that itinerary
         itinerary = Itinerary.objects.get(pk=pk)
         if itinerary.customer == requesting_user:
-            attraction = Attraction.objects.get(pk=request.data["ride_id"])
+            attraction = Attraction.objects.get(pk=request.data["attraction_id"])
 
             itinerary.attraction = attraction
             itinerary.starttime = request.data["starttime"]
