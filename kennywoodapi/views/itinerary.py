@@ -95,7 +95,8 @@ class Itineraries(ViewSet):
             # only delete the itinerary if the user requesting is the user that is associated with that itinerary
             if itinerary.customer == requesting_user:
                 itinerary.delete()
-            else: 
+                return Response({}, status=status.HTTP_204_NO_CONTENT)
+            else:
                 return Response({}, status=status.HTTP_403_FORBIDDEN)
         except Itinerary.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
