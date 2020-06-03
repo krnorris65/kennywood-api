@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from kennywoodapi.models import Itinerary, Attraction, Customer
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 class ItinerarySerializer(serializers.HyperlinkedModelSerializer):
     """JSON serializer for park areas
@@ -18,12 +19,13 @@ class ItinerarySerializer(serializers.HyperlinkedModelSerializer):
             view_name="itinerary",
             lookup_field='id'
         )
-        fields = ('id', 'url', 'attraction', 'starttime', 'attraction_id',)
+        fields = ('id', 'url', 'image_path', 'attraction', 'starttime', 'attraction_id',)
         depth = 2      
 
 
 class Itineraries(ViewSet):
     """Itineraries for Kennywood Amusement Park"""
+    parser_classees = (MultiPartParser, FormParser, JSONParser, )
 
     def create(self, request):
         """Handle POST operations
@@ -38,6 +40,7 @@ class Itineraries(ViewSet):
         new_itinerary.customer = customer
         new_itinerary.attraction = attraction
         new_itinerary.starttime = request.data["starttime"]
+        new_itinerary.image_path = request.data["image_path"]
 
         new_itinerary.save()
 

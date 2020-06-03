@@ -19,6 +19,9 @@ from rest_framework.authtoken.views import obtain_auth_token
 from kennywoodapi.models import *
 from kennywoodapi.views import ParkAreas, Itineraries, Attractions
 from kennywoodapi.views import register_user, login_user
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -32,4 +35,4 @@ urlpatterns = [
     path('login', login_user),
     path('api-token-auth/', obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
