@@ -75,6 +75,7 @@ class TestParkAreas(TestCase):
             theme="Integration tests"
         )
 
+
         # Delete a parkarea. As shown in our post and get tests above, new_parkarea
         # will be the only parkarea in the database, and will have an id of 1
         response = self.client.delete(
